@@ -65,7 +65,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 10px;
-            overflow-x: hidden;
+            overflow-x: auto;
             overflow-y: auto;
             transition: border 0.3s ease;
             border: 4px solid transparent;
@@ -86,7 +86,7 @@
         .dev-floater {
             position: absolute;
             color: var(--primary);
-            opacity: 0.15;
+            opacity: 0.25;
             font-weight: 900;
             font-size: 1.2rem;
             animation: drift linear infinite alternate;
@@ -187,7 +187,7 @@
             width: 300px;
             max-width: 90vw;
             backdrop-filter: blur(20px);
-            border-radius: 16px;
+            border-radius: 24px;
             animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
@@ -209,7 +209,7 @@
                 padding: 10px;
                 text-align: center;
                 resize: none;
-                border-radius: 6px;
+                border-radius: 12px;
             }
 
                 .modal-box input:focus, .modal-box textarea:focus {
@@ -228,6 +228,13 @@
             padding: 10px;
             font-weight: bold;
             cursor: pointer;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Custom Toast Notification */
@@ -244,7 +251,7 @@
             border: none;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             transition: right 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border-radius: 8px;
+            border-radius: 16px;
         }
 
             #toast.show {
@@ -265,7 +272,7 @@
             z-index: 10001;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            border-radius: 8px;
+            border-radius: 16px;
         }
 
             #auth-trigger:hover {
@@ -292,7 +299,7 @@
             max-height: 95vh;
             overflow-y: auto;
             backdrop-filter: blur(10px);
-            border-radius: 8px;
+            border-radius: 24px;
         }
 
         #admin-panel.dev-visible {
@@ -316,12 +323,14 @@
                 border: 1px solid #444;
                 padding: 8px;
                 margin-bottom: 12px;
-                border-radius: 6px;
+                border-radius: 12px;
+                transition: all 0.3s ease;
             }
 
                 #admin-panel select:focus, #admin-panel input:focus {
                     border-color: var(--primary);
                     outline: none;
+                    box-shadow: 0 0 10px rgba(var(--primary), 0.2);
                 }
 
         .dash-btn {
@@ -337,7 +346,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 16px;
         }
 
             .dash-btn::after {
@@ -377,6 +386,7 @@
                 font-size: 0.65rem;
                 transition: all 0.3s ease;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                border-radius: 16px;
             }
 
             .status-grid button:hover {
@@ -406,7 +416,7 @@
             flex-direction: column;
             z-index: 10;
             backdrop-filter: blur(10px);
-            border-radius: 16px;
+            border-radius: 24px;
         }
 
         #theme-dot {
@@ -475,7 +485,8 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
             position: relative;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 16px;
+            display: inline-block;
         }
 
             a::before {
@@ -537,6 +548,13 @@
             padding: 8px;
             border-style: dashed;
             flex: 1;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .src-link:hover {
+            opacity: 1;
+            border-style: solid;
         }
 
         .src-code-btn {
@@ -551,6 +569,12 @@
             border-style: dashed;
             border-width: 1px;
             flex: 1;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .src-code-btn:hover {
+            opacity: 0.7;
         }
 
         .status {
@@ -670,6 +694,359 @@
             font-size: 0.65rem;
             display: block;
             margin-bottom: 2px;
+        }
+
+        /* Quick Buttons Feature */
+        #quick-buttons-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            z-index: 25000;
+            justify-content: center;
+            align-items: center;
+            animation: quickButtonsFadeIn 0.5s ease-in-out;
+        }
+
+        #quick-buttons-overlay.show {
+            display: flex;
+        }
+
+        @keyframes quickButtonsFadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0px);
+            }
+            to {
+                opacity: 1;
+                backdrop-filter: blur(5px);
+            }
+        }
+
+        .quick-buttons-container {
+            background: linear-gradient(135deg, #151515 0%, #1a1a2e 100%);
+            border: 2px solid var(--primary);
+            padding: 40px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            max-width: 400px;
+            width: 90%;
+            animation: quickButtonsSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        #quick-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+            border-radius: 24px;
+        }
+
+        @keyframes quickButtonsSlideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .quick-buttons-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
+            animation: quickButtonsTitleGlow 0.8s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes quickButtonsTitleGlow {
+            from {
+                text-shadow: 0 0 10px var(--primary);
+            }
+            to {
+                text-shadow: 0 0 25px var(--primary);
+            }
+        }
+
+        .quick-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            width: 100%;
+            margin: 10px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quick-btn {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 3px solid;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: quickButtonsBounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation-fill-mode: both;
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            color: #fff;
+        }
+
+        .quick-btn:nth-child(1) { animation-delay: 0.1s; }
+        .quick-btn:nth-child(2) { animation-delay: 0.2s; }
+        .quick-btn:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes quickButtonsBounceIn {
+            from {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .quick-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            filter: brightness(1.2);
+        }
+
+        .quick-btn:hover::before {
+            left: 100%;
+        }
+
+        .quick-buttons-ok-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #000;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            animation: quickButtonsOkPulse 0.8s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        @keyframes quickButtonsOkPulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        .quick-buttons-ok-btn::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-size: 1.2rem;
+            animation: okCheckmark 0.6s ease-in-out infinite;
+        }
+
+        @keyframes okCheckmark {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .quick-buttons-ok-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .quick-buttons-ok-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Toggle button for quick buttons */
+        #quick-buttons-toggle {
+            display: none;
+            border-color: var(--primary);
+        }
+
+        #quick-buttons-toggle.show {
+            display: inline-block;
+        }
+
+        /* Quick Links Sidebar */
+        .quick-links-sidebar {
+            position: absolute;
+            right: -420px;
+            top: 0;
+            width: 380px;
+            background: linear-gradient(135deg, #151515 0%, #1a1a2e 100%);
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+            animation: quickLinksSidebarSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+        .quick-links-sidebar.show {
+            display: flex;
+        }
+
+        @keyframes quickLinksSidebarSlideIn {
+            from {
+                right: -420px;
+                opacity: 0;
+            }
+            to {
+                right: -400px;
+                opacity: 1;
+            }
+        }
+
+        .quick-links-sidebar.hide {
+            animation: quickLinksSidebarSlideOut 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes quickLinksSidebarSlideOut {
+            from {
+                right: -400px;
+                opacity: 1;
+            }
+            to {
+                right: -420px;
+                opacity: 0;
+            }
+        }
+
+        .quick-links-sidebar-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px var(--primary);
+        }
+
+        .quick-links-sidebar-btn {
+            padding: 15px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border: 3px solid;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);
+            color: #fff;
+            animation: sidebarBtnFadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes sidebarBtnFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .quick-links-sidebar-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .quick-links-sidebar-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            filter: brightness(1.15);
+        }
+
+        .quick-links-sidebar-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Round all buttons */
+        a {
+            border-radius: 16px !important;
+        }
+
+        button {
+            border-radius: 16px !important;
+        }
+
+        @media (max-width: 600px) {
+            .quick-buttons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-buttons-container {
+                padding: 25px;
+            }
+
+            .quick-buttons-title {
+                font-size: 1.4rem;
+            }
         }
 
         @media (max-width: 600px) {
@@ -843,6 +1220,23 @@
 
     <button id="mobile-panel-toggle" class="dash-btn" onclick="toggleMobilePanel()" style="position: fixed; top: 15px; right: 15px; z-index: 10001; width: auto; padding: 8px 12px; font-size: 0.7rem; background: var(--primary); color: #000; display: none;">[PANEL]</button>
 
+    <!-- Quick Buttons Modal -->
+    <div id="quick-buttons-overlay">
+        <div id="quick-particles"></div>
+        <div class="quick-buttons-container">
+            <div class="quick-buttons-title">✦ quick links ✦</div>
+            <div class="quick-buttons-grid">
+                <a href="#" class="quick-btn" id="quick-roblox">Roblox</a>
+                <a href="#" class="quick-btn" id="quick-twitch">Twitch</a>
+                <a href="#" class="quick-btn" id="quick-discord">Discord</a>
+            </div>
+            <button class="quick-buttons-ok-btn" onclick="closeQuickButtons()">OK, GOT IT</button>
+        </div>
+    </div>
+
+    <!-- Quick Buttons Toggle -->
+    <button id="quick-buttons-toggle" class="show" onclick="toggleQuickButtons()" title="Toggle Quick Links">⚡</button>
+
     <div id="admin-panel">
         <div style="font-size:0.6rem; color:var(--primary); margin-bottom:5px; display: flex; justify-content: space-between; align-items: center;">
             <span>USERS ACTIVE: <span id="user-count">1</span></span>
@@ -897,7 +1291,7 @@
             <a href="#" id="link-twitch" class="twitch">Twitch</a>
             <a href="#" id="link-tiktok" class="tiktok">TikTok</a>
             <a href="#" id="link-discord" class="discord">Discord</a>
-
+            <a href="#" id="quick-buttons-toggle" class="show" onclick="toggleQuickButtonsSidebar(); return false;" title="Toggle Quick Links">Quick Links</a>
 
             <div class="link-group">
                 <a href="#" id="live-vip" class="server-vip">Private server <span id="vip-status" class="status"></span></a>
@@ -930,6 +1324,7 @@
             </div>
             <div class="copyright">© Copyright 2026 The Huge nPixelz™ | All rights reserved ®</div> <!--omg thats me-->
         </div>
+
     </div>
 
     <script type="module">
@@ -960,6 +1355,131 @@ import { getDatabase, ref, onValue, set, onDisconnect, increment, push } from "h
     if (isMod && !isDev) {
         localStorage.removeItem('isDev');
     }
+
+    // --- QUICK BUTTONS LOGIC ---
+    window.closeQuickButtons = () => {
+        const overlay = document.getElementById('quick-buttons-overlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
+        }
+        localStorage.setItem('hasSeenQuickButtons', 'true');
+        const toggle = document.getElementById('quick-buttons-toggle');
+        if (toggle) toggle.classList.add('show');
+    };
+
+    window.toggleQuickButtonsSidebar = () => {
+        const sidebar = document.getElementById('quick-links-sidebar');
+        if (!sidebar) return;
+        if (sidebar.classList.contains('show')) {
+            sidebar.classList.add('hide');
+            setTimeout(() => {
+                sidebar.classList.remove('show', 'hide');
+            }, 500);
+        } else {
+            sidebar.classList.remove('hide');
+            sidebar.classList.add('show');
+        }
+    };
+
+    window.toggleQuickButtons = () => {
+        const overlay = document.getElementById('quick-buttons-overlay');
+        if (!overlay) return;
+        if (overlay.classList.contains('show')) {
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        } else {
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.classList.add('show');
+            }, 10);
+        }
+    };
+
+    // Check if user has seen quick buttons before
+    window.initializeQuickButtons = () => {
+        const hasSeenQuickButtons = localStorage.getItem('hasSeenQuickButtons');
+        const overlay = document.getElementById('quick-buttons-overlay');
+        const toggle = document.getElementById('quick-buttons-toggle');
+        
+        if (!hasSeenQuickButtons) {
+            // First visit - show the modal
+            if (overlay) overlay.classList.add('show');
+            if (toggle) toggle.classList.remove('show');
+            // Add particles to quick buttons modal
+            window.addQuickButtonsParticles();
+        } else {
+            // Not first visit - remove quick links completely
+            if (overlay) overlay.remove();
+            document.querySelectorAll('[id="quick-buttons-toggle"]').forEach(el => el.remove());
+            const sidebar = document.getElementById('quick-links-sidebar');
+            if (sidebar) sidebar.remove();
+        }
+    };
+
+    // Add particles to quick buttons modal
+    window.addQuickButtonsParticles = () => {
+        const particleContainer = document.getElementById('quick-particles');
+        if (particleContainer && particleContainer.children.length === 0) {
+            const particleText = '[QUICK]';
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) { 
+                let span = document.createElement('span');
+                span.innerText = particleText;
+                span.className = 'dev-floater';
+                
+                // randomize position within the modal area
+                span.style.top = Math.random() * 100 + '%';
+                span.style.left = Math.random() * 100 + '%';
+                
+                // vary speed
+                span.style.animationDuration = (5 + Math.random() * 10) + 's';
+                span.style.animationDelay = (Math.random() * 5) + 's';
+                
+                // slight scale variation
+                span.style.fontSize = (0.3 + Math.random() * 0.4) + 'rem';
+                span.style.opacity = (0.15 + Math.random() * 0.15);
+                
+                particleContainer.appendChild(span);
+            }
+        }
+    };
+
+    // Sync quick button styles with main button styles
+    window.syncQuickButtonStyles = () => {
+        const quickButtons = ['roblox', 'twitch', 'discord'];
+        quickButtons.forEach(btnKey => {
+            const quickBtn = document.getElementById(`quick-${btnKey}`);
+            const quickSidebarBtn = document.getElementById(`quick-${btnKey}-sidebar`);
+            const mainBtn = document.getElementById(`link-${btnKey}`);
+            if (mainBtn) {
+                const style = getComputedStyle(mainBtn);
+                if (quickBtn) {
+                    quickBtn.style.borderTopColor = style.borderTopColor;
+                    quickBtn.style.borderRightColor = style.borderRightColor;
+                    quickBtn.style.borderBottomColor = style.borderBottomColor;
+                    quickBtn.style.borderLeftColor = style.borderLeftColor;
+                }
+                if (quickSidebarBtn) {
+                    quickSidebarBtn.style.borderTopColor = style.borderTopColor;
+                    quickSidebarBtn.style.borderRightColor = style.borderRightColor;
+                    quickSidebarBtn.style.borderBottomColor = style.borderBottomColor;
+                    quickSidebarBtn.style.borderLeftColor = style.borderLeftColor;
+                }
+            }
+        });
+    };
+
+    // Initialize quick buttons on page load
+    setTimeout(() => {
+        window.initializeQuickButtons();
+        window.syncQuickButtonStyles();
+    }, 100);
 
     // --- OWNER HIDDEN TRIGGER ---
     const ownerBtn = document.createElement('button');
@@ -1156,6 +1676,20 @@ import { getDatabase, ref, onValue, set, onDisconnect, increment, push } from "h
                     localStorage.setItem('cache_title', s.val());
                 } else {
                     uiElements[key].href = s.val();
+                    // Also update quick buttons if they exist
+                    const quickBtn = document.getElementById(`quick-${key}`);
+                    if (quickBtn) {
+                        quickBtn.href = s.val();
+                        // Copy the styling from main buttons to quick buttons
+                        const mainBtn = document.getElementById(`link-${key}`);
+                        if (mainBtn) {
+                            const style = getComputedStyle(mainBtn);
+                            quickBtn.style.borderTopColor = style.borderTopColor;
+                            quickBtn.style.borderRightColor = style.borderRightColor;
+                            quickBtn.style.borderBottomColor = style.borderBottomColor;
+                            quickBtn.style.borderLeftColor = style.borderLeftColor;
+                        }
+                    }
                 }
             });
         });
