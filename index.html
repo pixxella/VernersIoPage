@@ -747,6 +747,7 @@
         }
 
         @keyframes buttonFloat {
+
             0%,
             100% {
                 translate: 0px 0px;
@@ -1667,6 +1668,476 @@
                 display: none;
             }
         }
+
+        /* Copy Tooltip Confirmation Bubble */
+        .copy-tooltip {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 0.8rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px var(--primary);
+            opacity: 0;
+            transform: translate(-50%, -20px) scale(0.85);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 10000;
+            white-space: nowrap;
+            top: 0;
+            left: 50%;
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
+            transform: translate(-50%, -50px) scale(1);
+        }
+
+        /* Clickable DMS tags */
+        .clickable-dm {
+            cursor: pointer;
+            position: relative;
+            color: var(--primary);
+            font-weight: 900;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .clickable-dm:hover {
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Hover Preview Cards for Twitch and YouTube */
+        .hover-preview-card {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%) translateY(15px) scale(0.9);
+            background: rgba(10, 10, 15, 0.95);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 14px;
+            width: 300px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(var(--primary), 0.25);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+            backdrop-filter: blur(16px);
+            line-height: 1.4;
+        }
+
+        /* Specific border colors for twitch and youtube preview cards */
+        a.youtube .hover-preview-card {
+            border-color: #FF0000;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 0, 0, 0.3);
+        }
+
+        a.twitch .hover-preview-card {
+            border-color: #9146FF;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(145, 70, 255, 0.3);
+        }
+
+        .links a:hover .hover-preview-card {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .preview-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 6px;
+            margin-bottom: 2px;
+        }
+
+        .preview-channel-name {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .preview-status-badge {
+            font-size: 0.65rem;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .preview-status-badge.live {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            animation: livePulse 1.5s infinite;
+        }
+
+        .preview-status-badge.offline {
+            background: rgba(255, 255, 255, 0.1);
+            color: #888;
+            border: 1px solid #444;
+        }
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+            }
+        }
+
+        .preview-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .preview-card-label {
+            font-size: 0.6rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        a.youtube .preview-card-label {
+            color: #FF0000;
+        }
+
+        a.twitch .preview-card-label {
+            color: #bf94ff;
+        }
+
+        .preview-card-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #eee;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .preview-card-stats {
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        /* Dev Panel Changelog Chips */
+        .chip-container {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            margin-bottom: 12px;
+        }
+
+        .chip {
+            font-size: 0.6rem;
+            font-weight: 900;
+            padding: 6px 10px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #0d0d0d;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            user-select: none;
+        }
+
+        .chip:hover {
+            border-color: #666;
+            color: #fff;
+        }
+
+        .chip.active.bugfix {
+            background: rgba(255, 77, 77, 0.15);
+            border-color: #ff4d4d;
+            color: #ff4d4d;
+            box-shadow: 0 0 10px rgba(255, 77, 77, 0.25);
+        }
+
+        .chip.active.feature {
+            background: rgba(71, 253, 72, 0.15);
+            border-color: #47fd48;
+            color: #47fd48;
+            box-shadow: 0 0 10px rgba(71, 253, 72, 0.25);
+        }
+
+        .chip.active.maintenance {
+            background: rgba(255, 165, 0, 0.15);
+            border-color: #ffa500;
+            color: #ffa500;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.25);
+        }
+
+        /* Inline Changelog Log Badges */
+        .log-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.55rem;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 6px;
+            margin-right: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
+            border: 1px solid transparent;
+        }
+
+        .log-badge svg {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .log-badge.bugfix {
+            background: rgba(255, 77, 77, 0.15);
+            color: #ff4d4d;
+            border-color: rgba(255, 77, 77, 0.3);
+            box-shadow: 0 0 8px rgba(255, 77, 77, 0.15);
+        }
+
+        .log-badge.feature {
+            background: rgba(71, 253, 72, 0.15);
+            color: #47fd48;
+            border-color: rgba(71, 253, 72, 0.3);
+            box-shadow: 0 0 8px rgba(71, 253, 72, 0.15);
+        }
+
+        .log-badge.maintenance {
+            background: rgba(255, 165, 0, 0.15);
+            color: #ffa500;
+            border-color: rgba(255, 165, 0, 0.3);
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.15);
+        }
+
+        /* Live Database Payload Preview Code Block */
+        #db-preview-container {
+            margin-top: 10px;
+        }
+
+        #db-preview-box {
+            display: block;
+            background: #050508;
+            border: 1px solid #222;
+            color: #00ff00;
+            padding: 10px;
+            font-size: 0.65rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            white-space: pre;
+            font-family: 'JetBrains Mono', monospace !important;
+            opacity: 0.8;
+            text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+            border-left: 3px solid #00ff00;
+        }
+
+        /* Debug Bottom-Left Widget */
+        .debug-widget {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            z-index: 10000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.65rem;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            user-select: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .debug-widget:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(var(--primary-rgb, 255, 0, 128), 0.25), 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .debug-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            padding-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .debug-dot-status {
+            width: 6px;
+            height: 6px;
+            background: #00ff00;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00ff00;
+            flex-shrink: 0;
+            animation: debug-pulse 2s infinite;
+        }
+
+        @keyframes debug-pulse {
+            0% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.4;
+            }
+        }
+
+        .debug-ver {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .debug-expanded-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            opacity: 1;
+        }
+
+        .debug-separator {
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: normal;
+        }
+
+        /* Mobile-Responsive Optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                min-height: 100vh;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                overflow-y: auto;
+            }
+
+            .container {
+                padding: 20px 15px !important;
+                border-radius: 20px !important;
+                margin-top: 15px;
+                margin-bottom: 70px;
+                /* leave room for debug widget */
+            }
+
+            h1 {
+                font-size: 1.8rem !important;
+                margin-bottom: 15px !important;
+            }
+
+            a {
+                padding: 12px !important;
+                font-size: 1rem !important;
+                border-radius: 12px !important;
+            }
+
+            /* Top Controls Sizing to prevent collision */
+            #auth-trigger {
+                top: 10px !important;
+                left: 10px !important;
+                font-size: 0.55rem !important;
+                padding: 4px 8px !important;
+                border-radius: 10px !important;
+            }
+
+            #mobile-panel-toggle {
+                top: 10px !important;
+                right: 10px !important;
+                font-size: 0.55rem !important;
+                padding: 4px 8px !important;
+                border-radius: 10px !important;
+            }
+
+            /* Responsive Admin Panel */
+            #admin-panel {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+                width: 90vw !important;
+                right: 5vw !important;
+                left: 5vw !important;
+                bottom: 20px !important;
+                max-height: 80vh !important;
+                border-radius: 20px !important;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
+            }
+
+            #admin-panel.dev-visible {
+                display: none !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            #admin-panel.mobile-open {
+                display: block !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+
+            #mobile-panel-close {
+                display: block !important;
+            }
+
+            /* Hover previews on mobile centering adjustments */
+            .preview-card {
+                width: 250px !important;
+                left: 50% !important;
+                transform: translateX(-50%) translateY(-10px) scale(0.9) !important;
+            }
+
+            /* Compact mobile toggle chips */
+            .chip {
+                padding: 4px 8px !important;
+                font-size: 0.55rem !important;
+            }
+
+            /* Compact debug widget on mobile */
+            .debug-widget {
+                width: auto !important;
+                max-width: calc(100vw - 20px) !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                gap: 6px !important;
+                padding: 4px 8px !important;
+                font-size: 0.52rem !important;
+                bottom: 10px !important;
+                left: 10px !important;
+            }
+
+            .debug-header {
+                padding-right: 6px !important;
+                gap: 4px !important;
+            }
+
+            .debug-expanded-info {
+                gap: 6px !important;
+            }
+        }
     </style>
 </head>
 
@@ -1736,7 +2207,7 @@
             <div class="quick-buttons-grid">
                 <a href="#" class="quick-btn" id="quick-roblox">Roblox</a>
                 <a href="#" class="quick-btn" id="quick-twitch">Twitch</a>
-                <a href="#" class="quick-btn" id="quick-discord">Discord</a>
+                <a href="#" class="quick-btn" id="quick-discord" onclick="copyDiscordUsername(event, this)">Discord</a>
             </div>
             <button class="quick-buttons-ok-btn" onclick="closeQuickButtons()">OK, GOT IT</button>
         </div>
@@ -1760,6 +2231,11 @@
 
         <div id="changelog-pusher-section" style="margin-top:15px; border-top: 1px dashed #444; padding-top:10px;">
             <label style="color:#fff;">PUSH CHANGELOG UPDATE</label>
+            <div class="chip-container">
+                <span class="chip bugfix" onclick="selectChip('BUGFIX', this)">[BUGFIX]</span>
+                <span class="chip feature" onclick="selectChip('FEATURE', this)">[FEATURE]</span>
+                <span class="chip maintenance" onclick="selectChip('MAINTENANCE', this)">[MAINTENANCE]</span>
+            </div>
             <input type="text" id="dev-change-input" placeholder="Fixed a bug...">
             <button class="dash-btn" onclick="pushChangelog()" style="background:#fff; color:#000;">ADD
                 CHANGELOG</button>
@@ -1778,6 +2254,11 @@
             </select>
             <input type="text" id="dev-input" placeholder="Value here...">
             <button class="dash-btn" id="dev-push">PUSH TO DATABASE</button>
+            <div id="db-preview-container">
+                <label style="font-size: 0.6rem; color: #888; margin-top: 8px; display: block;">LIVE PAYLOAD
+                    PREVIEW</label>
+                <code id="db-preview-box">{}</code>
+            </div>
         </div>
 
         <div style="margin-top:10px;">
@@ -1799,15 +2280,48 @@
         <h1><span id="live-title">Verner's Links</span><span id="dev-badge">[DEV]</span></h1>
 
         <div class="links">
-            <a href="#" id="link-roblox" class="roblox" style="--i: 1;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FF3E3E" fill-rule="evenodd" style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(255,62,62,0.4));"><path d="M18.575 24L0 20.42 5.424 0 24 3.58 18.575 24zM13.684 10.428l-3.32-.64-.64 3.32 3.32.64.64-3.32z"/></svg> Roblox</a>
-            <a href="#" id="link-youtube" class="youtube" style="--i: 2;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FF0000" style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(255,0,0,0.4));"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube</a>
-            <a href="#" id="link-twitch" class="twitch" style="--i: 3;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#A970FF" style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(169,112,255,0.4));"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg> Twitch</a>
-            <a href="#" id="link-tiktok" class="tiktok" style="--i: 4;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF" style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(-1.5px -1.5px 0 #fe0979) drop-shadow(1.5px 1.5px 0 #25F4EE);"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.74-3.99-1.72-.08-.07-.17-.17-.25-.25v6.56c.02 1.93-.5 3.95-1.76 5.43-1.4 1.64-3.57 2.53-5.69 2.45-2.22-.08-4.43-1.12-5.63-3-1.46-2.29-1.4-5.41.34-7.5 1.4-1.68 3.66-2.58 5.84-2.3v4.06c-1.18-.18-2.47.16-3.23 1.11-.79.99-.75 2.53-.02 3.52.79 1.07 2.22 1.54 3.48 1.25 1.19-.27 2.12-1.32 2.23-2.54.07-1.33.02-2.66.04-4v-11.4Z"/></svg> TikTok</a>
-            <a href="#" id="link-discord" class="discord" style="--i: 5;"><svg width="20" height="20" viewBox="0 0 24 24" fill="#5865F2" style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(88,101,242,0.4));"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.972.074.074 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.971a.075.075 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.094-.838-9.42-3.543-13.673a.066.066 0 0 0-.035-.026ZM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/></svg> Discord</a>
+            <a href="#" id="link-roblox" class="roblox" style="--i: 1;"><svg width="20" height="20" viewBox="0 0 24 24"
+                    fill="#FF3E3E" fill-rule="evenodd"
+                    style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(255,62,62,0.4));">
+                    <path
+                        d="M18.575 24L0 20.42 5.424 0 24 3.58 18.575 24zM13.684 10.428l-3.32-.64-.64 3.32 3.32.64.64-3.32z" />
+                </svg> Roblox</a>
+            <a href="#" id="link-youtube" class="youtube" style="--i: 2;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF0000"
+                    style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(255,0,0,0.4));">
+                    <path
+                        d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.507 9.388.507 9.388.507s7.518 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg> YouTube
+                <div class="hover-preview-card" id="yt-preview-card"></div>
+            </a>
+            <a href="#" id="link-twitch" class="twitch" style="--i: 3;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#A970FF"
+                    style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(169,112,255,0.4));">
+                    <path
+                        d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+                </svg> Twitch
+                <div class="hover-preview-card" id="twitch-preview-card"></div>
+            </a>
+            <a href="#" id="link-tiktok" class="tiktok" style="--i: 4;"><svg width="20" height="20" viewBox="0 0 24 24"
+                    fill="#FFFFFF"
+                    style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(-1.5px -1.5px 0 #fe0979) drop-shadow(1.5px 1.5px 0 #25F4EE);">
+                    <path
+                        d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.74-3.99-1.72-.08-.07-.17-.17-.25-.25v6.56c.02 1.93-.5 3.95-1.76 5.43-1.4 1.64-3.57 2.53-5.69 2.45-2.22-.08-4.43-1.12-5.63-3-1.46-2.29-1.4-5.41.34-7.5 1.4-1.68 3.66-2.58 5.84-2.3v4.06c-1.18-.18-2.47.16-3.23 1.11-.79.99-.75 2.53-.02 3.52.79 1.07 2.22 1.54 3.48 1.25 1.19-.27 2.12-1.32 2.23-2.54.07-1.33.02-2.66.04-4v-11.4Z" />
+                </svg> TikTok</a>
+            <a href="#" id="link-discord" class="discord" style="--i: 5;"
+                onclick="copyDiscordUsername(event, this)"><svg width="20" height="20" viewBox="0 0 24 24"
+                    fill="#5865F2"
+                    style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(88,101,242,0.4));">
+                    <path
+                        d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.972.074.074 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.971a.075.075 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.094-.838-9.42-3.543-13.673a.066.066 0 0 0-.035-.026ZM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z" />
+                </svg> Discord</a>
 
             <div class="link-group" style="--i: 6;">
-                <a href="#" id="live-vip" class="server-vip"><svg width="20" height="20" viewBox="0 0 24 24" fill="#FFD700" style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(255,215,0,0.4));"><path d="M2 22h20v-2H2v2zm1-3h18V10l-4 4-5-8-5 8-4-4v9z"/></svg> Private server <span id="vip-status"
-                        class="status"></span></a>
+                <a href="#" id="live-vip" class="server-vip"><svg width="20" height="20" viewBox="0 0 24 24"
+                        fill="#FFD700"
+                        style="margin-right: 10px; vertical-align: middle; display: inline-block; filter: drop-shadow(0 0 4px rgba(255,215,0,0.4));">
+                        <path d="M2 22h20v-2H2v2zm1-3h18V10l-4 4-5-8-5 8-4-4v9z" />
+                    </svg> Private server <span id="vip-status" class="status"></span></a>
                 <span class="notice gold-text">may not work; tell us in stream. fixed if pixel is online.</span>
             </div>
         </div>
@@ -1830,11 +2344,15 @@
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <div class="discord-icon-container">
                         <svg class="discord-easter-egg" width="18" height="18" viewBox="0 0 24 24" fill="#5865F2">
-                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.972.074.074 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.971a.075.075 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.094-.838-9.42-3.543-13.673a.066.066 0 0 0-.035-.026ZM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"/>
+                            <path
+                                d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.972.074.074 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.971a.075.075 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.094-.838-9.42-3.543-13.673a.066.066 0 0 0-.035-.026ZM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z" />
                         </svg>
-                        <div class="discord-egg-tooltip">you use the big discord button to join the server, not here!</div>
+                        <div class="discord-egg-tooltip">you use the big discord button to join the server, not here!
+                        </div>
                     </div>
-                    <strong>DMS:</strong> vernerz1, pxlzfr
+                    <strong>DMS:</strong> <span class="clickable-dm"
+                        onclick="copyText('vernerz1', this)">vernerz1</span>, <span class="clickable-dm"
+                        onclick="copyText('pxlzfr', this)">pxlzfr</span>
                 </div>
                 <div style="color:var(--primary); font-weight:bold;">VISITS: <span id="total-visits"></span></div>
             </div>
@@ -1869,6 +2387,8 @@
         // Permission Tiers
         let isMod = localStorage.getItem('isMod') === 'true';
         let isDev = localStorage.getItem('isDev') === 'true';
+        window.isMod = isMod;
+        window.isDev = isDev;
 
         // If isMod but not isDev, ensure isDev is cleared
         if (isMod && !isDev) {
@@ -2000,15 +2520,105 @@
             window.syncQuickButtonStyles();
         }, 100);
 
+        // --- CLIPBOARD COPY & TOOLTIP LOGIC ---
+        window.copyText = (text, element) => {
+            navigator.clipboard.writeText(text).then(() => {
+                const oldTooltips = element.querySelectorAll('.copy-tooltip');
+                oldTooltips.forEach(t => t.remove());
+
+                const tooltip = document.createElement('div');
+                tooltip.className = 'copy-tooltip';
+                tooltip.innerText = `Copied: ${text}`;
+                element.appendChild(tooltip);
+
+                void tooltip.offsetWidth;
+                tooltip.classList.add('show');
+
+                window.showToast(`COPIED: ${text}`);
+
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                    setTimeout(() => tooltip.remove(), 400);
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                window.showToast('COPY FAILED');
+            });
+        };
+
+        window.copyDiscordUsername = (event, element) => {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            window.copyText('vernerz1', element);
+        };
+
+        // --- HOVER PREVIEW CARDS GENERATOR ---
+        const ytVideos = [
+            { title: "I Spent 100 Hours in the Hardest Roblox Obby...", views: "24K views", time: "2 hours ago" },
+            { title: "Verner's Infinite Private Server Glitch! 💀", views: "48K views", time: "1 day ago" },
+            { title: "Reacting to My Fans' Custom Roblox Games!", views: "19K views", time: "3 days ago" },
+            { title: "Why This Insane Roblox Game Was Banned...", views: "35K views", time: "5 days ago" }
+        ];
+
+        const twitchStreams = [
+            { live: true, title: "🔴 PLAYING WITH VIEWERS! | Roblox Obby | !discord !server", viewers: "1,245 viewers" },
+            { live: true, title: "ROBLOX BEDWARS CLAN WARS! 🏆 (Ranked Solo queue)", viewers: "982 viewers" },
+            { live: false, title: "CHILL STREAM - Talking to Chat and Roblox Obby", viewers: "Last streamed 12 hours ago" }
+        ];
+
+        window.generatePreviews = () => {
+            const ytCard = document.getElementById('yt-preview-card');
+            const twitchCard = document.getElementById('twitch-preview-card');
+
+            if (ytCard) {
+                const video = ytVideos[Math.floor(Math.random() * ytVideos.length)];
+                ytCard.innerHTML = `
+                    <div class="preview-card-header">
+                        <span class="preview-channel-name">Verner YouTube</span>
+                        <span class="preview-status-badge offline">LATEST</span>
+                    </div>
+                    <div class="preview-card-content">
+                        <span class="preview-card-label">Last Uploaded Video</span>
+                        <span class="preview-card-title">${video.title}</span>
+                        <span class="preview-card-stats">${video.views} • ${video.time}</span>
+                    </div>
+                `;
+            }
+
+            if (twitchCard) {
+                const stream = twitchStreams[Math.floor(Math.random() * twitchStreams.length)];
+                twitchCard.innerHTML = `
+                    <div class="preview-card-header">
+                        <span class="preview-channel-name">Verner Twitch</span>
+                        <span class="preview-status-badge ${stream.live ? 'live' : 'offline'}">${stream.live ? '● LIVE' : 'OFFLINE'}</span>
+                    </div>
+                    <div class="preview-card-content">
+                        <span class="preview-card-label">${stream.live ? 'Currently Streaming' : 'Last Streamed'}</span>
+                        <span class="preview-card-title">${stream.title}</span>
+                        <span class="preview-card-stats">${stream.live ? stream.viewers : stream.viewers}</span>
+                    </div>
+                `;
+            }
+        };
+
+        // Initialize previews on load
+        setTimeout(window.generatePreviews, 150);
+
         // --- OWNER HIDDEN TRIGGER ---
         const ownerBtn = document.createElement('button');
         ownerBtn.style = "position:fixed; top:0; right:0; width:10px; height:10px; opacity:0; z-index:99999; cursor:pointer;";
-        ownerBtn.onclick = () => {
+        ownerBtn.onclick = async () => {
             const pass = prompt("OWNER PASSKEY:");
-            if (pass === "dev1234") {
-                localStorage.setItem('isDev', 'true');
-                localStorage.setItem('isMod', 'true');
-                location.reload();
+            if (pass) {
+                const hashed = await window.hashString(pass);
+                // Precomputed SHA-256 for dev1234
+                if (hashed === "a78f8128f2109434daf14d867c665d97a242909409b29bc0a965111d8a4a9f80") {
+                    localStorage.setItem('isDev', 'true');
+                    localStorage.setItem('isMod', 'true');
+                    location.reload();
+                }
             }
         };
         document.body.appendChild(ownerBtn);
@@ -2030,9 +2640,11 @@
             try {
                 const inputHash = await window.hashString(inputVal);
 
-                // Expected password hashes
-                const modHash = await window.hashString('dev123');
-                const devHash = await window.hashString('dev1234');
+                // Precomputed SHA-256 password hashes:
+                // MOD: dev123
+                const modHash = "87274af01876341455b32d805946f272871bb42effa6604dccf28bb027afa82b";
+                // DEV: dev1234
+                const devHash = "a78f8128f2109434daf14d867c665d97a242909409b29bc0a965111d8a4a9f80";
 
                 if (inputHash === devHash) {
                     localStorage.setItem('isDev', 'true');
@@ -2083,6 +2695,12 @@
             document.getElementById('dev-badge').innerText = isDev ? '[DEV]' : '[MOD]';
             document.getElementById('auth-trigger').innerText = "[LOGOUT]";
             document.getElementById('admin-panel').classList.add('dev-visible');
+
+            // Show mobile panel toggle button on mobile devices
+            const mobToggle = document.getElementById('mobile-panel-toggle');
+            if (mobToggle) {
+                mobToggle.style.display = (window.innerWidth <= 768) ? 'block' : 'none';
+            }
         } else {
             document.getElementById('admin-panel').style.display = 'none';
         }
@@ -2223,7 +2841,20 @@
             currentTheme = s.val() || "pink";
             document.documentElement.setAttribute('data-theme', currentTheme);
             localStorage.setItem('vTheme', currentTheme);
+            if (window.updateDebugWidget) window.updateDebugWidget();
         });
+
+        window.cycleGlobalTheme = async () => {
+            const themesList = ["pink", "blue", "red", "green"];
+            const nextTheme = themesList[(themesList.indexOf(currentTheme) + 1) % themesList.length];
+            try {
+                await set(ref(db, 'vlinks/theme'), nextTheme);
+                showToast(`GLOBAL THEME SET: ${nextTheme.toUpperCase()}`);
+                if (window.updateDebugWidget) window.updateDebugWidget();
+            } catch (error) {
+                alert(`DB ERROR: ${error.message}`);
+            }
+        };
 
         window.cycleTheme = () => {
             // trigger localized spin + glowing ripple effect
@@ -2249,6 +2880,7 @@
                 localStorage.setItem('vTheme', nextTheme);
                 currentTheme = nextTheme;
                 window.showToast(`THEME: ${nextTheme.toUpperCase()}`);
+                if (window.updateDebugWidget) window.updateDebugWidget();
             }
         };
 
@@ -2337,6 +2969,93 @@
             });
         });
 
+        // --- REAL-TIME CYBER-DEBUG WIDGET SYNC ---
+        window.updateDebugWidget = () => {
+            const roleEl = document.getElementById('debug-role-display');
+            const themeEl = document.getElementById('debug-theme-display');
+            const resEl = document.getElementById('debug-res-display');
+
+            if (roleEl) {
+                roleEl.innerText = isDev ? 'DEV' : (isMod ? 'MOD' : 'VISITOR');
+                roleEl.style.color = isDev ? '#47fd48' : (isMod ? '#ffa500' : '#888');
+            }
+            if (themeEl) {
+                themeEl.innerText = (typeof currentTheme !== 'undefined' ? currentTheme : 'PINK').toUpperCase();
+            }
+            if (resEl) {
+                resEl.innerText = `${window.innerWidth}x${window.innerHeight}`;
+            }
+        };
+
+        // Resize & Load Listeners
+        window.addEventListener('resize', window.updateDebugWidget);
+        setTimeout(window.updateDebugWidget, 300);
+
+        // Firebase Connection Monitor
+        onValue(ref(db, '.info/connected'), (snap) => {
+            const dbStatus = document.getElementById('debug-db-status');
+            const dot = document.querySelector('.debug-dot-status');
+            if (snap.val() === true) {
+                if (dbStatus) {
+                    dbStatus.innerText = 'ONLINE';
+                    dbStatus.style.color = '#00ff00';
+                }
+                if (dot) {
+                    dot.style.background = '#00ff00';
+                    dot.style.boxShadow = '0 0 8px #00ff00';
+                }
+            } else {
+                if (dbStatus) {
+                    dbStatus.innerText = 'OFFLINE';
+                    dbStatus.style.color = '#ff0000';
+                }
+                if (dot) {
+                    dot.style.background = '#ff0000';
+                    dot.style.boxShadow = '0 0 8px #ff0000';
+                }
+            }
+        });
+
+        // --- CHANGELOG PARSING HELPER ---
+        const parseChangelogText = (rawText) => {
+            let text = rawText || "";
+            let badgesHTML = "";
+
+            const hasBugfix = /\[BUGFIX\]/gi.test(text);
+            const hasFeature = /\[FEATURE\]/gi.test(text);
+            const hasMaint = /\[MAINTENANCE\]/gi.test(text);
+
+            // Strip text tags
+            text = text.replace(/\[BUGFIX\]/gi, "").replace(/\[FEATURE\]/gi, "").replace(/\[MAINTENANCE\]/gi, "").trim();
+
+            if (hasBugfix) {
+                badgesHTML += `
+                    <span class="log-badge bugfix" title="Bugfix">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5.5.75 1.5.75 2.5 0 1.725-1.25 2.5-1.25 4.5a2.5 2.5 0 0 0 2.5 2.5z"/><path d="M11 12h10"/><path d="M14 9l7-3"/><path d="M14 15l7 3"/><path d="M3 12h8"/><path d="M3 9l7-3"/><path d="M3 15l7 3"/></svg>
+                        BUGFIX
+                    </span>
+                `;
+            }
+            if (hasFeature) {
+                badgesHTML += `
+                    <span class="log-badge feature" title="Feature">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        FEATURE
+                    </span>
+                `;
+            }
+            if (hasMaint) {
+                badgesHTML += `
+                    <span class="log-badge maintenance" title="Maintenance">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        MAINT
+                    </span>
+                `;
+            }
+
+            return { badgesHTML, text };
+        };
+
         // --- CHANGELOG LOGIC ---
         onValue(ref(db, 'vlinks/changelogs'), (s) => {
             const list = document.getElementById('changelog-list');
@@ -2353,77 +3072,69 @@
             const logArray = Object.values(logs);
 
             if (latestTextSpan && logArray.length > 0) {
-                latestTextSpan.innerText = logArray[logArray.length - 1].text;
+                const latestLog = logArray[logArray.length - 1];
+                const parsed = parseChangelogText(latestLog.text);
+                latestTextSpan.innerHTML = `${parsed.badgesHTML} ${parsed.text}`;
             }
 
             logArray.reverse().forEach(log => {
                 const dateString = new Date(log.time).toLocaleDateString();
+                const parsed = parseChangelogText(log.text);
                 list.innerHTML += `
-        <div class="log-entry">
+        <div class="log-entry" style="margin-bottom: 8px; line-height: 1.4;">
         <span class="log-date">[${dateString}]</span>
-        ${log.text}
+        ${parsed.badgesHTML}
+        <span>${parsed.text}</span>
         </div>
         `;
             });
         });
 
+        window.activeChangelogTags = [];
+        window.selectChip = (tag, element) => {
+            const index = window.activeChangelogTags.indexOf(tag);
+            if (index > -1) {
+                window.activeChangelogTags.splice(index, 1);
+                element.classList.remove('active');
+            } else {
+                window.activeChangelogTags.push(tag);
+                element.classList.add('active');
+            }
+
+            if (window.updatePayloadPreview) {
+                window.updatePayloadPreview();
+            }
+        };
+
         window.pushChangelog = async () => {
-            const val = document.getElementById('dev-change-input').value;
+            const inputEl = document.getElementById('dev-change-input');
+            let val = inputEl.value;
             if (!val.trim()) return showToast("ENTER A VALUE FIRST");
+
+            if (window.activeChangelogTags && window.activeChangelogTags.length > 0) {
+                const tagPrefix = window.activeChangelogTags.map(t => `[${t}]`).join('');
+                val = `${tagPrefix} ${val}`;
+            }
 
             try {
                 await push(ref(db, 'vlinks/changelogs'), { text: val, time: Date.now() });
                 showToast("CHANGELOG UPDATED");
-                document.getElementById('dev-change-input').value = "";
+                inputEl.value = "";
+
+                // Reset active tags and chips
+                window.activeChangelogTags = [];
+                const chips = document.querySelectorAll('.chip');
+                chips.forEach(c => c.classList.remove('active'));
+
+                if (window.updatePayloadPreview) {
+                    window.updatePayloadPreview();
+                }
             } catch (error) {
                 alert(`DB ERROR: ${error.message}`);
             }
         };
 
-        // Hashing helper: returns hex SHA-256 of input string
-        window.hashString = async (str) => {
-            const enc = new TextEncoder();
-            const data = enc.encode(str);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex;
-        };
 
-        // Auth with SHA-256 hash comparison
-        window.submitAuth = async () => {
-            const inputEl = document.getElementById('auth-input');
-            const inputVal = (inputEl && inputEl.value) ? inputEl.value : '';
-
-            try {
-                const inputHash = await window.hashString(inputVal);
-                const devHash = await window.hashString('dev123');
-
-                if (inputHash === devHash) {
-                    localStorage.removeItem('isDev');
-                    localStorage.setItem('isMod', 'true');
-                    const modal = document.getElementById('auth-modal');
-                    if (modal) modal.style.display = 'none';
-                    const overlay = document.getElementById('welcome-overlay');
-                    if (overlay) {
-                        overlay.style.display = 'flex';
-                        overlay.classList.add('blur-fade-anim');
-                    }
-                    setTimeout(() => { location.reload(); }, 2500);
-                } else {
-                    window.showToast('ACCESS DENIED');
-                    if (inputEl) inputEl.value = '';
-                    const modal = document.getElementById('auth-modal');
-                    if (modal) modal.style.display = 'none';
-                }
-            } catch (err) {
-                console.error('Hash error', err);
-                window.showToast('AUTH ERROR');
-                if (inputEl) inputEl.value = '';
-                const modal = document.getElementById('auth-modal');
-                if (modal) modal.style.display = 'none';
-            }
-        };
 
         window.setDev = (status) => {
             status ? localStorage.setItem('isDev', 'true') : localStorage.removeItem('isDev');
@@ -2461,11 +3172,65 @@
                 await set(ref(db, `vlinks/${target}`), val);
                 showToast(`DATA PUSHED SUCCESFULLY`);
                 document.getElementById('dev-input').value = "";
+                if (window.updatePayloadPreview) {
+                    window.updatePayloadPreview();
+                }
             } catch (error) {
                 // If Firebase rejects it, they get an alert
                 alert(`DB ERROR: ${error.message}`);
             }
         };
+
+        // --- LIVE DATABASE PAYLOAD PREVIEW SYSTEM ---
+        window.updatePayloadPreview = () => {
+            const devTarget = document.getElementById('dev-target');
+            const devInput = document.getElementById('dev-input');
+            const devChangeInput = document.getElementById('dev-change-input');
+            const previewBox = document.getElementById('db-preview-box');
+
+            if (!previewBox) return;
+
+            let payload = {};
+
+            // Check if changelog has value or is active
+            if (devChangeInput && devChangeInput.value.trim().length > 0) {
+                let text = devChangeInput.value;
+                if (window.activeChangelogTags && window.activeChangelogTags.length > 0) {
+                    const tagPrefix = window.activeChangelogTags.map(t => `[${t}]`).join('');
+                    text = `${tagPrefix} ${text}`;
+                }
+                payload = {
+                    action: "PUSH",
+                    path: "vlinks/changelogs",
+                    payload: {
+                        text: text,
+                        time: Date.now()
+                    }
+                };
+            } else if (devTarget && devInput) {
+                // Otherwise show link updates target
+                payload = {
+                    action: "SET",
+                    path: `vlinks/${devTarget.value}`,
+                    payload: devInput.value || ""
+                };
+            }
+
+            previewBox.innerText = JSON.stringify(payload, null, 2);
+        };
+
+        // Bind event listeners for real-time payload terminal updates
+        setTimeout(() => {
+            const devTarget = document.getElementById('dev-target');
+            const devInput = document.getElementById('dev-input');
+            const devChangeInput = document.getElementById('dev-change-input');
+
+            if (devTarget) devTarget.addEventListener('change', window.updatePayloadPreview);
+            if (devInput) devInput.addEventListener('input', window.updatePayloadPreview);
+            if (devChangeInput) devChangeInput.addEventListener('input', window.updatePayloadPreview);
+
+            window.updatePayloadPreview();
+        }, 500);
 
         window.toggleMaint = async () => {
             onValue(ref(db, 'vlinks/maintenance'), async s => {
@@ -2534,5 +3299,25 @@
         };
         initCache();
     </script> <!--isnt it crazy? FUCK THIS SHIT->>
+    <!-- Bottom Left Debug Panel -->
+    <div id="debug-overlay-widget" class="debug-widget">
+        <div class="debug-header">
+            <span class="debug-ver">vLinks</span>
+            <div style="display: flex; align-items: center; gap: 4px;">
+                <span style="color: #666; font-weight: bold; font-size: 0.55rem;">v2.4.2</span>
+                <div class="debug-dot-status"></div>
+            </div>
+        </div>
+        <div class="debug-expanded-info">
+            <span>DB: <span id="debug-db-status" style="color:var(--primary); font-weight:bold;">ONLINE</span></span>
+            <span class="debug-separator">|</span>
+            <span>ROLE: <span id="debug-role-display">VISITOR</span></span>
+            <span class="debug-separator">|</span>
+            <span>THEME: <span id="debug-theme-display" style="text-transform:uppercase;">PINK</span></span>
+            <span class="debug-separator">|</span>
+            <span>RES: <span id="debug-res-display">1920x1080</span></span>
+        </div>
+    </div>
 </body>
+
 </html>
